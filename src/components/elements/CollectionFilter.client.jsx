@@ -1,4 +1,4 @@
-import { Heading, Section, Text } from '~/components';
+import { Section, Text } from '~/components';
 import { useState } from 'react';
 import './css/custom.css';
 import { FaArrowDown } from './FaArrowDown';
