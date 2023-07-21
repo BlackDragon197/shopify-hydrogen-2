@@ -40,7 +40,8 @@
 .li-cap,
 label,
 p,
-button {
+button,
+li {
   color: #343434;
 }
 .collection-filter-container > .nested-availability-filter {
