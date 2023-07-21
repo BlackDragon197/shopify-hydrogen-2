@@ -35,6 +35,11 @@
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+.filter-title,
+.filter-price,
+.li-cap {
+  color: #343434;
+}
 .collection-filter-container > .nested-availability-filter {
   display: none;
 }
@@ -45,6 +50,10 @@
   display: flex;
   gap: 32px;
   margin: auto;
+}
+header,
+section {
+  background-color: #f5f5f5;
 }
 .collection-filter-container.show
   > .nested-availability-filter
