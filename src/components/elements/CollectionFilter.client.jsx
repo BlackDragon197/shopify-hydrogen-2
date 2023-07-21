@@ -17,9 +17,10 @@ export function CollectionFilter({ minPrice, maxPrice, filterObj }) {
   const onFilterParam = (event) => {
     let closeAll = document.getElementsByClassName('show');
     if (closeAll.length >= 1) {
-      for (var i = 0; i < closeAll.length; i++) {
-        closeAll[i].classList.remove('show');
-      }
+      if (!event.target.closest('.nested-list').classList.contains('show'))
+        for (var i = 0; i < closeAll.length; i++) {
+          closeAll[i].classList.remove('show');
+        }
     }
     event.target.closest('.nested-list').classList.toggle('show');
   };
@@ -53,9 +54,14 @@ export function CollectionFilter({ minPrice, maxPrice, filterObj }) {
     if (event.target.closest('.filter-price')) {
       let closeAll = document.getElementsByClassName('show');
       if (closeAll.length >= 1) {
-        for (var i = 0; i < closeAll.length; i++) {
-          closeAll[i].classList.remove('show');
-        }
+        if (
+          !event.target
+            .closest('.collection-price-container')
+            .classList.contains('show')
+        )
+          for (var i = 0; i < closeAll.length; i++) {
+            closeAll[i].classList.remove('show');
+          }
       }
       event.target
         .closest('.collection-price-container')

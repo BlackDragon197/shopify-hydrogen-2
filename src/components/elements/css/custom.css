@@ -26,6 +26,10 @@
   display: flex;
   justify-content: space-around;
   padding: 0 10px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 .collection-filter-container > .nested-availability-filter {
   display: none;
@@ -115,6 +119,11 @@ div.nested-list.solo.show > li {
   width: 180px;
   border-left: 1px solid lightgrey;
   border-right: 1px solid lightgrey;
+}
+@media only screen and (max-device-width: 570px) {
+  .nested-list > li {
+    left: -100px;
+  }
 }
 .nested-list > li:first-of-type {
   margin-top: 10px;
