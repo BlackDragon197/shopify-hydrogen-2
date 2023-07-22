@@ -43,7 +43,6 @@ export default function Collection({ params, request }) {
   url.searchParams.forEach((value, key) => {
     fullparams.push(key);
   });
-  console.log('full:', fullparams);
   filterPrice = url.searchParams.get('price') === 'true' ? true : false;
   if (filterPrice) {
     filterMinPrice = parseFloat(url.searchParams.get('min'));
@@ -151,13 +150,7 @@ export default function Collection({ params, request }) {
     },
     preload: true,
   }).data.collection.products;
-  console.log(
-    'filterprice:',
-    filterPrice,
-    'color:',
-    filterColor,
-    'size',
-    filterSize
+  
   );
 
   // let arr = [];
@@ -188,7 +181,6 @@ export default function Collection({ params, request }) {
   let sigma;
   let filterObj = { size: [] };
   let colorObj = { color: [] };
-  let options = [];
   let sizes = new Set();
   let colors = new Set();
   sigma = Object.values(mem);
@@ -207,7 +199,6 @@ export default function Collection({ params, request }) {
   colorObj.color = Array.from(colors);
   filterObj.size = Array.from(sizes);
   Object.assign(filterObj, colorObj);
-  console.log(filterObj);
   if (!collection) {
     return <NotFound type="collection" />;
   }
