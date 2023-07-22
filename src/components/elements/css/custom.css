@@ -17,6 +17,10 @@
 #mainContent > section {
   background: #f5f5f5;
 }
+.reset {
+  text-decoration: underline;
+  cursor: pointer;
+}
 .collection-filter-sorting-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -144,6 +148,13 @@ div.nested-list.solo.show > li {
     left: -100px;
   }
 }
+@media only screen and (min-device-width: 570px) {
+  .reset {
+    position: relative;
+    left: 20px;
+  }
+}
+
 .nested-list > li:first-of-type {
   margin-top: 10px;
   border-top: 1px solid lightgrey;

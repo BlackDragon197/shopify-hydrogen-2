@@ -30,12 +30,20 @@ export default function Collection({ params, request }) {
   const url = new URL(request.url);
   sortKey = url.searchParams.get('sortkey');
   sortReverse = url.searchParams.get('reverse') === 'true' ? true : false;
-  var filterAvailability =
-    url.searchParams.get('availability') === 'true'
-      ? true
-      : url.searchParams.get('availability') === 'false'
-      ? false
-      : 'both';
+  let filterAvailability = true;
+  var color;
+  var filterColor = url.searchParams.has('color')
+    ? (color = url.searchParams.get('color'))
+    : '';
+  var size;
+  var filterSize = url.searchParams.has('size')
+    ? (size = url.searchParams.get('size'))
+    : '';
+  let fullparams = [];
+  url.searchParams.forEach((value, key) => {
+    fullparams.push(key);
+  });
+  console.log('full:', fullparams);
   filterPrice = url.searchParams.get('price') === 'true' ? true : false;
   if (filterPrice) {
     filterMinPrice = parseFloat(url.searchParams.get('min'));
@@ -48,75 +56,61 @@ export default function Collection({ params, request }) {
   } = useLocalization();
   const {
     data: { collection },
-  } =
-    filterPrice == true
-      ? useShopQuery({
-          query: COLLECTION_FILTER_PRICE_QUERY,
-          variables: {
-            handle,
-            language,
-            country,
-            pageBy,
-            sortKey,
-            sortReverse,
-            filterMinPrice,
-            filterMaxPrice,
-          },
-          preload: true,
-        })
-      : filterAvailability == true
-      ? useShopQuery({
-          query: COLLECTION_FILTER_AVAILABILITY_QUERY,
-          variables: {
-            handle,
-            language,
-            country,
-            pageBy,
-            sortKey,
-            sortReverse,
-            filterAvailability,
-          },
-          preload: true,
-        })
-      : filterAvailability == false
-      ? useShopQuery({
-          query: COLLECTION_FILTER_AVAILABILITY_QUERY,
-          variables: {
-            handle,
-            language,
-            country,
-            pageBy,
-            sortKey,
-            sortReverse,
-            filterAvailability,
-          },
-          preload: true,
-        })
-      : filterAvailability === 'both'
-      ? useShopQuery({
-          query: COLLECTION_QUERY,
-          variables: {
-            handle,
-            language,
-            country,
-            pageBy,
-            sortKey,
-            sortReverse,
-          },
-          preload: true,
-        })
-      : useShopQuery({
-          query: COLLECTION_QUERY,
-          variables: {
-            handle,
-            language,
-            country,
-            pageBy,
-            sortKey,
-            sortReverse,
-          },
-          preload: true,
-        });
+  } = (fullparams[0] = 'price'
+    ? useShopQuery({
+        query: COLLECTION_FILTER_PRICE_QUERY,
+        variables: {
+          handle,
+          language,
+          country,
+          pageBy,
+          sortKey,
+          sortReverse,
+          filterMinPrice,
+          filterMaxPrice,
+        },
+        preload: true,
+      })
+    : (fullparams[0] = 'size'
+        ? useShopQuery({
+            query: COLLECTION_FILTER_SIZE,
+            variables: {
+              handle,
+              language,
+              country,
+              pageBy,
+              sortKey,
+              sortReverse,
+              size,
+            },
+            preload: true,
+          })
+        : (fullparams[0] = 'color'
+            ? useShopQuery({
+                query: COLLECTION_FILTER_COLOR,
+                variables: {
+                  handle,
+                  language,
+                  country,
+                  pageBy,
+                  sortKey,
+                  sortReverse,
+                  color,
+                },
+                preload: true,
+              })
+            : useShopQuery({
+                query: COLLECTION_QUERY,
+                variables: {
+                  handle,
+                  language,
+                  country,
+                  pageBy,
+                  sortKey,
+                  sortReverse,
+                },
+                preload: true,
+              }))));
 
   let mem = useShopQuery({
     query: COLLECTION_QUERY_FULL,
@@ -541,7 +535,7 @@ const COLLECTION_FILTER_SIZE = gql`
         height
         altText
       }
-      products(first: $pageBy, filters: { variantOption: { name: "Color", value: $size } }, after: $cursor, sortKey: $sortKey, reverse: $sortReverse) {
+      products(first: $pageBy, filters: { variantOption: { name: "Size", value: $size } }, after: $cursor, sortKey: $sortKey, reverse: $sortReverse) {
         nodes {
           ...ProductCard
           options {

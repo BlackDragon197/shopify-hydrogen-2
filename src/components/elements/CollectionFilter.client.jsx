@@ -25,6 +25,15 @@ export function CollectionFilter({ minPrice, maxPrice, filterObj }) {
     event.target.closest('.nested-list').classList.toggle('show');
   };
 
+  const OnReset = (event) => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.forEach((value, key) => {
+      url.searchParams.delete(key, value);
+    });
+    window.location.href = url.toString();
+  };
+
   const onFilterAvailabilityParam = (event) => {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
@@ -171,6 +180,9 @@ export function CollectionFilter({ minPrice, maxPrice, filterObj }) {
               onClick={onFilterParam}
             >
               <List data={filterObj}>asdsd</List>
+            </div>
+            <div className="reset" onClick={OnReset}>
+              Reset
             </div>
           </div>
         </div>
