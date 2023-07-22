@@ -52,7 +52,12 @@ label,
 .price-range-container > label,
 .nested-list > li,
 .reset,
-.reset > label {
+.reset > label,
+h3.max-w-prose.text-copy.w-full,
+p.max-w-prose-narrow.whitespace-pre-wrap,
+h1.whitespace-pre-wrap.max-w-prose-narrow,
+span.max-w-prose.whitespace-pre-wrap,
+span.strike {
   color: #343434;
 }
 .collection-filter-container > .nested-availability-filter {
