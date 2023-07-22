@@ -43,7 +43,7 @@
 .filter-price,
 .li-cap,
 label,
-p,
+.price-range-container > p,
 .price-range-container > button,
 .price-range-container > label,
 .nested-list > li {

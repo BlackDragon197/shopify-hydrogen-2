@@ -470,6 +470,94 @@ const COLLECTION_FILTER_PRICE_QUERY = gql`
   }
 `;
 
+const COLLECTION_FILTER_COLOR = gql`
+  ${PRODUCT_CARD_FRAGMENT}
+  query CollectionDetails(
+    $handle: String!
+    $country: CountryCode
+    $language: LanguageCode
+    $pageBy: Int!
+    $cursor: String
+    $sortKey:  ProductCollectionSortKeys
+    $sortReverse: Boolean
+    $color: String
+  ) @inContext(country: $country, language: $language) {
+    collection(handle: $handle) {
+      id
+      title
+      description
+      seo {
+        description
+        title
+      }
+      image {
+        id
+        url
+        width
+        height
+        altText
+      }
+      products(first: $pageBy, filters: { variantOption: { name: "Color", value: $color } }, after: $cursor, sortKey: $sortKey, reverse: $sortReverse) {
+        nodes {
+          ...ProductCard
+          options {
+            name
+            values
+          }
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+  }
+`;
+
+const COLLECTION_FILTER_SIZE = gql`
+  ${PRODUCT_CARD_FRAGMENT}
+  query CollectionDetails(
+    $handle: String!
+    $country: CountryCode
+    $language: LanguageCode
+    $pageBy: Int!
+    $cursor: String
+    $sortKey:  ProductCollectionSortKeys
+    $sortReverse: Boolean
+    $size: String
+  ) @inContext(country: $country, language: $language) {
+    collection(handle: $handle) {
+      id
+      title
+      description
+      seo {
+        description
+        title
+      }
+      image {
+        id
+        url
+        width
+        height
+        altText
+      }
+      products(first: $pageBy, filters: { variantOption: { name: "Color", value: $size } }, after: $cursor, sortKey: $sortKey, reverse: $sortReverse) {
+        nodes {
+          ...ProductCard
+          options {
+            name
+            values
+          }
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+  }
+`;
+
 const PAGINATE_COLLECTION_QUERY = gql`
   ${PRODUCT_CARD_FRAGMENT}
   query CollectionPage(
