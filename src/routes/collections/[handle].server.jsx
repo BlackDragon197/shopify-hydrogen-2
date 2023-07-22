@@ -150,8 +150,6 @@ export default function Collection({ params, request }) {
     },
     preload: true,
   }).data.collection.products;
-  
-  );
 
   // let arr = [];
   // Object.keys(mem).forEach(function (a) {
@@ -181,6 +179,7 @@ export default function Collection({ params, request }) {
   let sigma;
   let filterObj = { size: [] };
   let colorObj = { color: [] };
+  let options = [];
   let sizes = new Set();
   let colors = new Set();
   sigma = Object.values(mem);
