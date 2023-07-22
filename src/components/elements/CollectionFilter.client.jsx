@@ -182,7 +182,7 @@ export function CollectionFilter({ minPrice, maxPrice, filterObj }) {
               <List data={filterObj}>asdsd</List>
             </div>
             <div className="reset" onClick={OnReset}>
-              Reset
+              <label>Reset</label>
             </div>
           </div>
         </div>
