@@ -50,7 +50,8 @@ label,
 .price-range-container > p,
 .price-range-container > button,
 .price-range-container > label,
-.nested-list > li {
+.nested-list > li,
+.reset {
   color: #343434;
 }
 .collection-filter-container > .nested-availability-filter {
